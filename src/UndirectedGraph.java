@@ -31,21 +31,26 @@ public class UndirectedGraph
     // Creates a random graph.
     public void createRandomGraph(int n)
     {
+        // Create and add the number of nodes to graph.
         for (int i = 1; i <= n; i++)
         {
             addNode(i);
         }
+        // Randomly fill in the adjacency lists of each node.
         Random rand = new Random();
         for (int i = 1; i <= n; i++)
         {
+            // Random number of edges where max edges is n / 2
             int numEdges = rand.nextInt(n / 2) + 1;
             ArrayList<Integer> adjList = nodes.get(i);
             for (int j = 1; j <= numEdges; j++)
             {
+                // Choose random node
                 int random = rand.nextInt(n) + 1;
                 if (!adjList.contains(random) && random != i)
                 {
                     ArrayList<Integer> randomAdjList = nodes.get(random);
+                    // Add to the adjacency lists of both nodes.
                     adjList.add(random);
                     randomAdjList.add(i);
                 }
@@ -74,7 +79,7 @@ public class UndirectedGraph
 
     public static void main(String[] args)
     {
-        UndirectedGraph g = new UndirectedGraph(10);
+        UndirectedGraph g = new UndirectedGraph(5);
         g.printGraph();
     }
 }
