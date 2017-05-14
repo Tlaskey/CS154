@@ -25,6 +25,7 @@ public class UndirectedGraph
         nodes.put(x, new ArrayList<Integer>());
     }
 
+    // Creates a random graph.
     public void createRandomGraph(int n)
     {
         for (int i = 1; i <= n; i++)
@@ -41,7 +42,9 @@ public class UndirectedGraph
                 int random = rand.nextInt(n) + 1;
                 if (!adjList.contains(random) && random != i)
                 {
+                    ArrayList<Integer> randomAdjList = nodes.get(random);
                     adjList.add(random);
+                    randomAdjList.add(i);
                 }
             }
         }
@@ -68,7 +71,7 @@ public class UndirectedGraph
 
     public static void main(String[] args)
     {
-        UndirectedGraph g = new UndirectedGraph(10);
+        UndirectedGraph g = new UndirectedGraph(5);
         g.printGraph();
     }
 }
