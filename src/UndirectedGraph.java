@@ -25,14 +25,6 @@ public class UndirectedGraph
         nodes.put(x, new ArrayList<Integer>());
     }
 
-    public void addEdge(int from, int to)
-    {
-        ArrayList<Integer> listFrom = nodes.get(from);
-        ArrayList<Integer> listTo = nodes.get(to);
-        listFrom.add(to);
-        listTo.add(from);
-    }
-
     public void createRandomGraph(int n)
     {
         for (int i = 1; i <= n; i++)
