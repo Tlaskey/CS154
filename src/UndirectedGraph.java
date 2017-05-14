@@ -72,34 +72,34 @@ public class UndirectedGraph
         }
     }
 
-    public int findMaxClique()
-    {
-        // Get largest adjacency list and index of that list from nodes in
-        // graph.
-        HashSet<Integer> max = null;
-        int maxListIndex = 0;
-        for (int i = 1; i <= numNodes; i++)
-        {
-            if (max == null || nodes.get(i).size() > max.size())
-            {
-                max = nodes.get(i);
-                maxListIndex = i;
-            }
-        }
-
-        for (int x : max)
-        {
-            if (x != maxListIndex)
-            {
-
-            }
-        }
-        return 0;
-    }
+    // public int findMaxClique()
+    // {
+    // // Get largest adjacency list and index of that list from nodes in
+    // // graph.
+    // HashSet<Integer> max = null;
+    // int maxListIndex = 0;
+    // for (int i = 1; i <= numNodes; i++)
+    // {
+    // if (max == null || nodes.get(i).size() > max.size())
+    // {
+    // max = nodes.get(i);
+    // maxListIndex = i;
+    // }
+    // }
+    //
+    // for (int x : max)
+    // {
+    // if (x != maxListIndex)
+    // {
+    //
+    // }
+    // }
+    // return 0;
+    // }
 
     public static void main(String[] args)
     {
-        UndirectedGraph g = new UndirectedGraph(5);
+        UndirectedGraph g = new UndirectedGraph(7);
         g.printGraph();
     }
 }
