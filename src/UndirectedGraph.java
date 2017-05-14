@@ -1,31 +1,31 @@
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 
 public class UndirectedGraph
 {
-    private static Map<Integer, ArrayList<Integer>> nodes;
+    private static Map<Integer, HashSet<Integer>> nodes;
     private final int DEFAULT_SIZE = 10;
-    private int numNodes;
+    private static int numNodes;
 
     public UndirectedGraph(int n)
     {
-        nodes = new HashMap<Integer, ArrayList<Integer>>();
-        this.numNodes = n;
+        nodes = new HashMap<Integer, HashSet<Integer>>();
+        numNodes = n;
         createRandomGraph(n);
     }
 
     public UndirectedGraph()
     {
-        nodes = new HashMap<Integer, ArrayList<Integer>>();
-        this.numNodes = DEFAULT_SIZE;
+        nodes = new HashMap<Integer, HashSet<Integer>>();
+        numNodes = DEFAULT_SIZE;
         createRandomGraph(DEFAULT_SIZE);
     }
 
     public static void addNode(int x)
     {
-        nodes.put(x, new ArrayList<Integer>());
+        nodes.put(x, new HashSet<Integer>());
     }
 
     // Creates a random graph.
@@ -42,14 +42,14 @@ public class UndirectedGraph
         {
             // Random number of edges where max edges is n / 2
             int numEdges = rand.nextInt(n / 2) + 1;
-            ArrayList<Integer> adjList = nodes.get(i);
+            HashSet<Integer> adjList = nodes.get(i);
             for (int j = 1; j <= numEdges; j++)
             {
                 // Choose random node
                 int random = rand.nextInt(n) + 1;
                 if (!adjList.contains(random) && random != i)
                 {
-                    ArrayList<Integer> randomAdjList = nodes.get(random);
+                    HashSet<Integer> randomAdjList = nodes.get(random);
                     // Add to the adjacency lists of both nodes.
                     adjList.add(random);
                     randomAdjList.add(i);
@@ -62,7 +62,7 @@ public class UndirectedGraph
     {
         for (int i = 1; i <= numNodes; i++)
         {
-            ArrayList<Integer> adjList = nodes.get(i);
+            HashSet<Integer> adjList = nodes.get(i);
             System.out.println("Node: " + i);
             System.out.println("Adjacent Nodes:");
             for (Integer x : adjList)
@@ -74,6 +74,26 @@ public class UndirectedGraph
 
     public int findMaxClique()
     {
+        // Get largest adjacency list and index of that list from nodes in
+        // graph.
+        HashSet<Integer> max = null;
+        int maxListIndex = 0;
+        for (int i = 1; i <= numNodes; i++)
+        {
+            if (max == null || nodes.get(i).size() > max.size())
+            {
+                max = nodes.get(i);
+                maxListIndex = i;
+            }
+        }
+
+        for (int x : max)
+        {
+            if (x != maxListIndex)
+            {
+
+            }
+        }
         return 0;
     }
 
