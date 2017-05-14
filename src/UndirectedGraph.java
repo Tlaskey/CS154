@@ -6,18 +6,21 @@ import java.util.Random;
 public class UndirectedGraph
 {
     private static Map<Integer, ArrayList<Integer>> nodes;
+    private final int DEFAULT_SIZE = 10;
     private int numNodes;
 
     public UndirectedGraph(int n)
     {
         nodes = new HashMap<Integer, ArrayList<Integer>>();
-        createRandomGraph(n);
         this.numNodes = n;
+        createRandomGraph(n);
     }
 
     public UndirectedGraph()
     {
         nodes = new HashMap<Integer, ArrayList<Integer>>();
+        this.numNodes = DEFAULT_SIZE;
+        createRandomGraph(DEFAULT_SIZE);
     }
 
     public static void addNode(int x)
@@ -71,7 +74,7 @@ public class UndirectedGraph
 
     public static void main(String[] args)
     {
-        UndirectedGraph g = new UndirectedGraph(5);
+        UndirectedGraph g = new UndirectedGraph(10);
         g.printGraph();
     }
 }
