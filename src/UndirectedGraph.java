@@ -93,12 +93,7 @@ public class UndirectedGraph
      */
     public ArrayList<ArrayList<Node>> divideGraph(int groupSize)
     {
-        ArrayList<Node> helper = new ArrayList<>();
-        for (Node n : nodes)
-        {
-            helper.add(n);
-        }
-
+        ArrayList<Node> helper = new ArrayList<>(nodes);
         Random rand = new Random();
         ArrayList<ArrayList<Node>> dividedGraphs = new ArrayList<>();
         if (numNodes >= groupSize)
