@@ -1,11 +1,21 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * 
+ * @author tylerlaskey
+ *
+ */
 public class UndirectedGraph
 {
     private static ArrayList<Node> nodes;
     private static int numNodes;
 
+    /**
+     * 
+     * @param n
+     *            number of nodes in graph
+     */
     public UndirectedGraph(int n)
     {
         nodes = new ArrayList<>();
@@ -13,11 +23,23 @@ public class UndirectedGraph
         createRandomGraph(n);
     }
 
+    /**
+     * Add node to graph.
+     * 
+     * @param newNode
+     *            node to be added.
+     */
     public void addNode(int newNode)
     {
         nodes.add(new Node(newNode));
     }
 
+    /**
+     * Creates a random graph of size n.
+     * 
+     * @param n
+     *            number of nodes in graph.
+     */
     public void createRandomGraph(int n)
     {
         // Populate graph with n nodes.
@@ -46,6 +68,9 @@ public class UndirectedGraph
         }
     }
 
+    /**
+     * Prints the graph using adjacency list representation.
+     */
     public void printGraph()
     {
         for (Node n : nodes)
@@ -59,7 +84,13 @@ public class UndirectedGraph
         }
     }
 
-    // Divides graph into subgraphs of size 'groupSize'
+    /**
+     * Divides graph into subgraphs of size 'groupSize'
+     * 
+     * @param groupSize
+     *            size of the subgraphs
+     * @return ArrayList containing the subgraphs
+     */
     public ArrayList<ArrayList<Node>> divideGraph(int groupSize)
     {
         ArrayList<ArrayList<Node>> dividedGraphs = new ArrayList<>();
