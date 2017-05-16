@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * 
- * @author Tyler Laskey
+ * @authors Tyler Laskey, Matt Swerdon
  *
  */
 public class UndirectedGraph
@@ -270,6 +270,7 @@ public class UndirectedGraph
         testDivide.add(list2);
         printSubGraphs(testDivide);
         isClique(testDivide);
+
     }
 }
 
