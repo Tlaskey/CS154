@@ -1,58 +1,46 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class UndirectedGraph
 {
-    private static Map<Integer, HashSet<Integer>> nodes;
-    private final int DEFAULT_SIZE = 10;
+    private static ArrayList<Node> nodes;
     private static int numNodes;
 
     public UndirectedGraph(int n)
     {
-        nodes = new HashMap<Integer, HashSet<Integer>>();
+        nodes = new ArrayList<>();
         numNodes = n;
         createRandomGraph(n);
     }
 
-    public UndirectedGraph()
+    public void addNode(int newNode)
     {
-        nodes = new HashMap<Integer, HashSet<Integer>>();
-        numNodes = DEFAULT_SIZE;
-        createRandomGraph(DEFAULT_SIZE);
+        nodes.add(new Node(newNode));
     }
 
-    public static void addNode(int x)
-    {
-        nodes.put(x, new HashSet<Integer>());
-    }
-
-    // Creates a random graph.
     public void createRandomGraph(int n)
     {
-        // Create and add the number of nodes to graph.
+        // Populate graph with n nodes.
         for (int i = 1; i <= n; i++)
         {
             addNode(i);
         }
-        // Randomly fill in the adjacency lists of each node.
+        // Randomize number of edges for each node.
         Random rand = new Random();
-        for (int i = 1; i <= n; i++)
+        int numEdges = rand.nextInt(n / 2) + 1;
+        for (int i = 0; i < n; i++)
         {
-            // Random number of edges where max edges is n / 2
-            int numEdges = rand.nextInt(n / 2) + 1;
-            HashSet<Integer> adjList = nodes.get(i);
-            for (int j = 1; j <= numEdges; j++)
+            Node node = nodes.get(i);
+            ArrayList<Node> nodeAdjList = node.getAdjList();
+            for (int j = 0; j < numEdges; j++)
             {
-                // Choose random node
-                int random = rand.nextInt(n) + 1;
-                if (!adjList.contains(random) && random != i)
+                int randNum = rand.nextInt(n);
+                Node randNode = nodes.get(randNum);
+                ArrayList<Node> randNodeAdjList = randNode.getAdjList();
+                if (!nodeAdjList.contains(randNode) && node.getID() != randNode.getID())
                 {
-                    HashSet<Integer> randomAdjList = nodes.get(random);
-                    // Add to the adjacency lists of both nodes.
-                    adjList.add(random);
-                    randomAdjList.add(i);
+                    nodeAdjList.add(randNode);
+                    randNodeAdjList.add(node);
                 }
             }
         }
@@ -60,46 +48,69 @@ public class UndirectedGraph
 
     public void printGraph()
     {
-        for (int i = 1; i <= numNodes; i++)
+        for (Node n : nodes)
         {
-            HashSet<Integer> adjList = nodes.get(i);
-            System.out.println("Node: " + i);
-            System.out.println("Adjacent Nodes:");
-            for (Integer x : adjList)
+            System.out.println("Node: " + n.getID());
+            System.out.println("Adjacent Nodes: ");
+            for (Node x : n.getAdjList())
             {
-                System.out.println(x);
+                System.out.println(x.getID());
             }
         }
     }
 
-    // public int findMaxClique()
-    // {
-    // // Get largest adjacency list and index of that list from nodes in
-    // // graph.
-    // HashSet<Integer> max = null;
-    // int maxListIndex = 0;
-    // for (int i = 1; i <= numNodes; i++)
-    // {
-    // if (max == null || nodes.get(i).size() > max.size())
-    // {
-    // max = nodes.get(i);
-    // maxListIndex = i;
-    // }
-    // }
-    //
-    // for (int x : max)
-    // {
-    // if (x != maxListIndex)
-    // {
-    //
-    // }
-    // }
-    // return 0;
-    // }
+    public ArrayList<ArrayList<Node>> divideGraph(int groupSize)
+    {
+        ArrayList<ArrayList<Node>> dividedGraphs = new ArrayList<>();
+        if (numNodes >= groupSize)
+        {
+            int numGroups = numNodes / groupSize;
+            int initial = 1;
+            for (int i = 1; i <= numGroups + 1; i++)
+            {
+                // UndirectedGraph g = new UndirectedGraph();
+                for (int j = initial; j <= groupSize * i; j++)
+                {
+                    if (j <= numNodes)
+                    {
+
+                    }
+                }
+                // dividedGraphs.add(g);
+                initial += groupSize;
+            }
+            return dividedGraphs;
+        } else
+        {
+            return null;
+        }
+    }
 
     public static void main(String[] args)
     {
-        UndirectedGraph g = new UndirectedGraph(7);
+        UndirectedGraph g = new UndirectedGraph(5);
         g.printGraph();
+    }
+}
+
+class Node
+{
+    private int ID;
+    private ArrayList<Node> adjList;
+
+    public Node(int x)
+    {
+        this.ID = x;
+        adjList = new ArrayList<>();
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public ArrayList<Node> getAdjList()
+    {
+        return adjList;
     }
 }
