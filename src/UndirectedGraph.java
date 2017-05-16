@@ -64,19 +64,19 @@ public class UndirectedGraph
         ArrayList<ArrayList<Node>> dividedGraphs = new ArrayList<>();
         if (numNodes >= groupSize)
         {
-            int numGroups = numNodes / groupSize;
-            int initial = 1;
-            for (int i = 1; i <= numGroups + 1; i++)
+            double numGroups = numNodes / groupSize;
+            int initial = 0;
+            for (int i = 1; i <= numGroups; i++)
             {
-                // UndirectedGraph g = new UndirectedGraph();
+                ArrayList<Node> subGraph = new ArrayList<>();
                 for (int j = initial; j <= groupSize * i; j++)
                 {
                     if (j <= numNodes)
                     {
-
+                        subGraph.add(nodes.get(j));
                     }
                 }
-                // dividedGraphs.add(g);
+                dividedGraphs.add(subGraph);
                 initial += groupSize;
             }
             return dividedGraphs;
@@ -90,6 +90,17 @@ public class UndirectedGraph
     {
         UndirectedGraph g = new UndirectedGraph(5);
         g.printGraph();
+        ArrayList<ArrayList<Node>> divided = g.divideGraph(2);
+        int i = 1;
+        for (ArrayList<Node> subGraph : divided)
+        {
+            System.out.println("Subgraph: " + i);
+            for (Node node : subGraph)
+            {
+                System.out.println("Node: " + node.getID());
+            }
+            i++;
+        }
     }
 }
 
