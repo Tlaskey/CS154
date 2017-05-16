@@ -3,7 +3,7 @@ import java.util.Random;
 
 /**
  * 
- * @author tylerlaskey
+ * @author Tyler Laskey
  *
  */
 public class UndirectedGraph
@@ -121,24 +121,41 @@ public class UndirectedGraph
         }
     }
 
-    public static void main(String[] args)
+    /**
+     * Prints the subgraphs.
+     * 
+     * @param subGraphs
+     *            the subGraphs to be printed.
+     */
+    public static void printSubGraphs(ArrayList<ArrayList<Node>> subGraphs)
     {
-        UndirectedGraph g = new UndirectedGraph(100);
-        g.printGraph();
-        ArrayList<ArrayList<Node>> divided = g.divideGraph(25);
         int i = 1;
-        for (ArrayList<Node> subGraph : divided)
+        for (ArrayList<Node> list : subGraphs)
         {
             System.out.println("Subgraph: " + i);
-            for (Node node : subGraph)
+            for (Node node : list)
             {
                 System.out.println("Node: " + node.getID());
             }
             i++;
         }
     }
+
+    public static void main(String[] args)
+    {
+        UndirectedGraph g = new UndirectedGraph(10);
+        g.printGraph();
+        ArrayList<ArrayList<Node>> divided = g.divideGraph(5);
+        printSubGraphs(divided);
+    }
 }
 
+/**
+ * Node class
+ * 
+ * @author tylerlaskey
+ *
+ */
 class Node
 {
     private int ID;
@@ -158,5 +175,10 @@ class Node
     public ArrayList<Node> getAdjList()
     {
         return adjList;
+    }
+
+    public int nodeDegree()
+    {
+        return adjList.size();
     }
 }
