@@ -83,7 +83,7 @@ public class UndirectedGraph
         populateGraph(n);
         // Randomize number of edges for each node.
         Random rand = new Random();
-        int numEdges = rand.nextInt(n / 2) + 1;
+        int numEdges = rand.nextInt(n) + 1;
         for (int i = 0; i < n; i++)
         {
             Node node = nodes.get(i);
@@ -270,7 +270,6 @@ public class UndirectedGraph
         testDivide.add(list2);
         printSubGraphs(testDivide);
         isClique(testDivide);
-
     }
 }
 
@@ -304,10 +303,5 @@ class Node
     public void setAdjList(ArrayList<Node> adj)
     {
         this.adjList = adj;
-    }
-
-    public int nodeDegree()
-    {
-        return adjList.size();
     }
 }
