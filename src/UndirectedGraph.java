@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -132,7 +131,7 @@ public class UndirectedGraph
         ArrayList<ArrayList<Node>> dividedGraphs = new ArrayList<>();
         if (numNodes >= groupSize)
         {
-            double numGroups = numNodes / groupSize + 1;
+            double numGroups = numNodes / groupSize;
             for (int i = 1; i <= numGroups; i++)
             {
                 ArrayList<Node> subGraph = new ArrayList<>();
@@ -146,7 +145,7 @@ public class UndirectedGraph
                         helper.remove(random);
                     }
                 }
-                if (!subGraph.isEmpty())
+                if (!subGraph.isEmpty() && subGraph.size() == groupSize)
                 {
                     dividedGraphs.add(subGraph);
                 }
@@ -183,12 +182,14 @@ public class UndirectedGraph
      * 
      * @param subGraphs
      */
-    public static void isClique(ArrayList<ArrayList<Node>> subGraphs)
+    public static ArrayList<Boolean> isClique(ArrayList<ArrayList<Node>> subGraphs)
     {
+        ArrayList<Boolean> isClique = new ArrayList<>();
         for (ArrayList<Node> subGraph : subGraphs)
         {
-            System.out.println(isSubGraphClique(subGraph));
+            isClique.add(isSubGraphClique(subGraph));
         }
+        return isClique;
     }
 
     /**
@@ -228,48 +229,79 @@ public class UndirectedGraph
         return nodes;
     }
 
+    public boolean KClique(int groupSize)
+    {
+        boolean isClique = false;
+
+        while (!isClique)
+        {
+            this.printGraph();
+            ArrayList<ArrayList<Node>> subGraphs = this.divideGraph(groupSize);
+            printSubGraphs(subGraphs);
+            ArrayList<Boolean> list = isClique(subGraphs);
+            if (list.contains(true))
+            {
+                isClique = true;
+                System.out.println(list);
+            }
+        }
+        return isClique;
+    }
+
     public static void main(String[] args)
     {
-        UndirectedGraph test = new UndirectedGraph();
-        Node one = new Node(1);
-        Node two = new Node(2);
-        Node three = new Node(3);
-        Node four = new Node(4);
-        Node five = new Node(5);
-        Node six = new Node(6);
-        Node seven = new Node(7);
-        Node eight = new Node(8);
-        ArrayList<Node> oneList = new ArrayList<>(Arrays.asList(four, six, seven, two));
-        ArrayList<Node> twoList = new ArrayList<>(Arrays.asList(seven, eight, four, six, one));
-        ArrayList<Node> threeList = new ArrayList<>(Arrays.asList(five, six));
-        ArrayList<Node> fourList = new ArrayList<>(Arrays.asList(one, six, seven, five, two));
-        ArrayList<Node> fiveList = new ArrayList<>(Arrays.asList(four, three));
-        ArrayList<Node> sixList = new ArrayList<>(Arrays.asList(one, four, three, seven, two));
-        ArrayList<Node> sevenList = new ArrayList<>(Arrays.asList(two, four, six));
-        ArrayList<Node> eightList = new ArrayList<>(Arrays.asList(two));
-        one.setAdjList(oneList);
-        two.setAdjList(twoList);
-        three.setAdjList(threeList);
-        four.setAdjList(fourList);
-        five.setAdjList(fiveList);
-        six.setAdjList(sixList);
-        seven.setAdjList(sevenList);
-        eight.setAdjList(eightList);
-        test.addNode(one);
-        test.addNode(two);
-        test.addNode(three);
-        test.addNode(four);
-        test.addNode(five);
-        test.addNode(six);
-        test.addNode(seven);
-        test.addNode(eight);
-        ArrayList<ArrayList<Node>> testDivide = new ArrayList<>();
-        ArrayList<Node> list1 = new ArrayList<>(Arrays.asList(one, four, six, seven, two));
-        ArrayList<Node> list2 = new ArrayList<>(Arrays.asList(five, eight, three));
-        testDivide.add(list1);
-        testDivide.add(list2);
-        printSubGraphs(testDivide);
-        isClique(testDivide);
+        // UndirectedGraph test = new UndirectedGraph();
+        // Node one = new Node(1);
+        // Node two = new Node(2);
+        // Node three = new Node(3);
+        // Node four = new Node(4);
+        // Node five = new Node(5);
+        // Node six = new Node(6);
+        // Node seven = new Node(7);
+        // Node eight = new Node(8);
+        // ArrayList<Node> oneList = new ArrayList<>(Arrays.asList(four, six,
+        // seven, two));
+        // ArrayList<Node> twoList = new ArrayList<>(Arrays.asList(seven, eight,
+        // four, six, one));
+        // ArrayList<Node> threeList = new ArrayList<>(Arrays.asList(five,
+        // six));
+        // ArrayList<Node> fourList = new ArrayList<>(Arrays.asList(one, six,
+        // seven, five, two));
+        // ArrayList<Node> fiveList = new ArrayList<>(Arrays.asList(four,
+        // three));
+        // ArrayList<Node> sixList = new ArrayList<>(Arrays.asList(one, four,
+        // three, seven, two));
+        // ArrayList<Node> sevenList = new ArrayList<>(Arrays.asList(two, four,
+        // six));
+        // ArrayList<Node> eightList = new ArrayList<>(Arrays.asList(two));
+        // one.setAdjList(oneList);
+        // two.setAdjList(twoList);
+        // three.setAdjList(threeList);
+        // four.setAdjList(fourList);
+        // five.setAdjList(fiveList);
+        // six.setAdjList(sixList);
+        // seven.setAdjList(sevenList);
+        // eight.setAdjList(eightList);
+        // test.addNode(one);
+        // test.addNode(two);
+        // test.addNode(three);
+        // test.addNode(four);
+        // test.addNode(five);
+        // test.addNode(six);
+        // test.addNode(seven);
+        // test.addNode(eight);
+        // ArrayList<ArrayList<Node>> testDivide = new ArrayList<>();
+        // ArrayList<Node> list1 = new ArrayList<>(Arrays.asList(one, four, six,
+        // seven, two));
+        // ArrayList<Node> list2 = new ArrayList<>(Arrays.asList(five, eight,
+        // three));
+        // testDivide.add(list1);
+        // testDivide.add(list2);
+        // printSubGraphs(testDivide);
+        // System.out.println(isClique(testDivide));
+
+        UndirectedGraph g = new UndirectedGraph(100);
+        g.KClique(10);
     }
 }
 
