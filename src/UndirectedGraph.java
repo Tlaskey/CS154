@@ -93,26 +93,34 @@ public class UndirectedGraph
      */
     public ArrayList<ArrayList<Node>> divideGraph(int groupSize)
     {
+        ArrayList<Node> helper = new ArrayList<>();
+        for (Node n : nodes)
+        {
+            helper.add(n);
+        }
+
+        Random rand = new Random();
         ArrayList<ArrayList<Node>> dividedGraphs = new ArrayList<>();
         if (numNodes >= groupSize)
         {
             double numGroups = numNodes / groupSize + 1;
-            int initial = 0;
             for (int i = 1; i <= numGroups; i++)
             {
                 ArrayList<Node> subGraph = new ArrayList<>();
-                for (int j = initial; j < groupSize * i; j++)
+                while (subGraph.size() != groupSize && helper.size() != 0)
                 {
-                    if (j < numNodes)
+                    int size = helper.size();
+                    int random = rand.nextInt(size);
+                    if (!subGraph.contains(helper.get(random)))
                     {
-                        subGraph.add(nodes.get(j));
+                        subGraph.add(helper.get(random));
+                        helper.remove(random);
                     }
                 }
                 if (!subGraph.isEmpty())
                 {
                     dividedGraphs.add(subGraph);
                 }
-                initial += groupSize;
             }
             return dividedGraphs;
         } else
@@ -143,7 +151,7 @@ public class UndirectedGraph
 
     public static void main(String[] args)
     {
-        UndirectedGraph g = new UndirectedGraph(10);
+        UndirectedGraph g = new UndirectedGraph(12);
         g.printGraph();
         ArrayList<ArrayList<Node>> divided = g.divideGraph(5);
         printSubGraphs(divided);
