@@ -77,7 +77,10 @@ public class UndirectedGraph
                         subGraph.add(nodes.get(j));
                     }
                 }
-                dividedGraphs.add(subGraph);
+                if (!subGraph.isEmpty())
+                {
+                    dividedGraphs.add(subGraph);
+                }
                 initial += groupSize;
             }
             return dividedGraphs;
@@ -89,9 +92,9 @@ public class UndirectedGraph
 
     public static void main(String[] args)
     {
-        UndirectedGraph g = new UndirectedGraph(13);
+        UndirectedGraph g = new UndirectedGraph(100);
         g.printGraph();
-        ArrayList<ArrayList<Node>> divided = g.divideGraph(5);
+        ArrayList<ArrayList<Node>> divided = g.divideGraph(25);
         int i = 1;
         for (ArrayList<Node> subGraph : divided)
         {
