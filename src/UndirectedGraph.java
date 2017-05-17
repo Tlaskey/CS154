@@ -232,17 +232,17 @@ public class UndirectedGraph
     public boolean KClique(int groupSize)
     {
         boolean isClique = false;
-
         while (!isClique)
         {
-            this.printGraph();
             ArrayList<ArrayList<Node>> subGraphs = this.divideGraph(groupSize);
-            printSubGraphs(subGraphs);
             ArrayList<Boolean> list = isClique(subGraphs);
             if (list.contains(true))
             {
+                this.printGraph();
+                printSubGraphs(subGraphs);
                 isClique = true;
                 System.out.println(list);
+                System.out.println(groupSize + "-clique");
             }
         }
         return isClique;
@@ -300,8 +300,11 @@ public class UndirectedGraph
         // printSubGraphs(testDivide);
         // System.out.println(isClique(testDivide));
 
-        UndirectedGraph g = new UndirectedGraph(100);
-        g.KClique(10);
+        UndirectedGraph g = new UndirectedGraph(1000);
+        for (int i = 3; i <= 12; i++)
+        {
+            g.KClique(i);
+        }
     }
 }
 
