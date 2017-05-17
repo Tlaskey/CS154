@@ -238,7 +238,7 @@ public class UndirectedGraph
             ArrayList<Boolean> list = isClique(subGraphs);
             if (list.contains(true))
             {
-                this.printGraph();
+                // this.printGraph();
                 printSubGraphs(subGraphs);
                 isClique = true;
                 System.out.println(list);
